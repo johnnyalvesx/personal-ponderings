@@ -42,7 +42,8 @@ public class PostagemController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public ResponseEntity<Void> delete(@PathVariable long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
