@@ -1,10 +1,8 @@
 package org.gen.personalponderings.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,20 +29,27 @@ public class Usuario {
     @NotNull(message = "O atributo usuário é obrigatório")
     @NotBlank(message = "O atributo usuário não pode ser vazio")
     @Email(message = "O atributo usuário deve ser um email")
-    private String usuario;
+    private String email;
 
     @NotNull(message = "O atributo senha é obrigatório")
     @Size(min = 5, message = "O atributo senha deve ter no mínimo 5 caracteres")
     private String senha;
 
+    private String foto;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
 
-    public Usuario(long id, String nome, String usuario, String senha, LocalDate dataNascimento) {
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("usuario")
+    private List<Postagem> postagem;
+
+    public Usuario(long id, String nome, String email, String senha, String foto, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
-        this.usuario = usuario;
+        this.email = email;
         this.senha = senha;
+        this.foto = foto;
         this.dataNascimento = dataNascimento;
     }
 
