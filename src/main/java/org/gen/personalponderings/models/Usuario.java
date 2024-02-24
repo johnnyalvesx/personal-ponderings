@@ -23,15 +23,18 @@ public class Usuario {
     private long id;
 
     @NotNull(message = "O atributo nome é obrigatório")
-    @Size(min = 5, max = 100, message = "O atributo nome deve ter no mínimo 05 e no máximo 100 caracteres")
+    @NotBlank(message = "O atributo nome não pode ser vazio")
+    @Size(min = 3, message = "O atributo nome deve ter no mínimo 3 caracteres")
     private String nome;
 
-    @NotNull(message = "O atributo usuário é obrigatório")
-    @NotBlank(message = "O atributo usuário não pode ser vazio")
-    @Email(message = "O atributo usuário deve ser um email")
+    @NotNull(message = "O atributo email é obrigatório")
+    @NotBlank(message = "O atributo email não pode ser vazio")
+    @Email(message = "O atributo email deve ser um email")
+    @Column(unique = true)
     private String email;
 
     @NotNull(message = "O atributo senha é obrigatório")
+    @NotBlank(message = "O atributo senha não pode ser vazio")
     @Size(min = 5, message = "O atributo senha deve ter no mínimo 5 caracteres")
     private String senha;
 

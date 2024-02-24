@@ -2,6 +2,8 @@ package org.gen.personalponderings.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -19,12 +21,14 @@ public class Postagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-    @Size(min = 5, max = 100)
+    @NotNull(message = "O atributo titulo é obrigatório")
+    @NotBlank(message = "O atributo titulo não pode ser vazio")
+    @Size(min = 5, message = "O atributo titulo deve ter no mínimo 5 caracteres")
     private String titulo;
 
-    @NotNull
-    @Size(min = 10, max = 500)
+    @NotNull(message = "O atributo texto é obrigatório")
+    @NotBlank(message = "O atributo texto não pode ser vazio")
+    @Size(min = 10, message = "O atributo titulo deve ter no mínimo 10 caracteres")
     private String texto;
 
     @Temporal(TemporalType.TIMESTAMP)
