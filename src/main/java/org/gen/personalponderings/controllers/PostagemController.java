@@ -1,5 +1,8 @@
 package org.gen.personalponderings.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.gen.personalponderings.models.Postagem;
 import org.gen.personalponderings.repositories.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
