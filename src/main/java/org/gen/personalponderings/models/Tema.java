@@ -20,9 +20,9 @@ public class Tema {
     @NotNull
     private String descricao;
 
-//    @OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties("tema")
-//    private List<Postagem> postagem;
+    @OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tema")
+    private List<Postagem> postagem;
 
 
     public Tema(long id, String descricao) {
