@@ -1,8 +1,8 @@
 package org.gen.personalponderings.controllers;
 
 import org.gen.personalponderings.exception.EmailAlreadyRegisteredException;
-import org.gen.personalponderings.models.Postagem;
 import org.gen.personalponderings.models.Usuario;
+import org.gen.personalponderings.models.validations.UsuarioValidator;
 import org.gen.personalponderings.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +32,9 @@ public class UsuarioController {
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> post(@RequestBody Usuario usuario) {
+        UsuarioValidator.validarNome(usuario.getNome());
+        UsuarioValidator.validarEmail(usuario.getEmail());
+
         Optional<Usuario> existingEmail = repository.findByEmail(usuario.getEmail());
         if (existingEmail.isPresent()) {
             throw new EmailAlreadyRegisteredException("Erro, o e-mail já está cadastrado");
@@ -41,6 +44,12 @@ public class UsuarioController {
 
     @PutMapping
     public ResponseEntity<Usuario> put(@RequestBody Usuario usuario) {
+        if (usuario.getNome() != null) {
+            UsuarioValidator.validarNome(usuario.getNome());
+        }
+        if (usuario.getEmail() != null) {
+            UsuarioValidator.validarEmail(usuario.getEmail());
+        }
         return ResponseEntity.ok(repository.save(usuario));
     }
 
