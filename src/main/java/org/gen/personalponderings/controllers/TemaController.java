@@ -41,6 +41,7 @@ public class TemaController {
 
     @PutMapping
     public ResponseEntity<Tema> put(@RequestBody Tema tema) {
+        TemaValidator.validarDescricao(tema.getDescricao());
         return ResponseEntity.ok(repository.save(tema));
     }
 

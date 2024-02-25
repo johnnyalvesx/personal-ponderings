@@ -19,9 +19,6 @@ public class Tema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull(message = "O atributo descricao é obrigatório")
-    @NotBlank(message = "O atributo descricao não pode ser vazio")
-    @Size(min = 3, message = "O atributo descricao deve ter no mínimo 3 caracteres")
     private String descricao;
 
     @OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)

@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.gen.personalponderings.models.Postagem;
+import org.gen.personalponderings.models.validations.PostagemValidator;
 import org.gen.personalponderings.repositories.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,8 @@ public class PostagemController {
 
     @PostMapping
     public ResponseEntity<Postagem> post(@RequestBody Postagem postagem) {
+        PostagemValidator.validarTitulo(postagem.getTitulo());
+        PostagemValidator.validarTexto(postagem.getTexto());
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
     }
 

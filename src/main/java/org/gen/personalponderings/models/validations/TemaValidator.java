@@ -7,7 +7,7 @@ public class TemaValidator {
             throw new IllegalArgumentException("O atributo descricao é obrigatório");
         }
         if (descricao.length() <  3) {
-            throw new IllegalArgumentException("O atributo nome deve ter no mínimo 3 caracteres");
+            throw new IllegalArgumentException("O atributo descricao deve ter no mínimo 3 caracteres");
         }
     }
 }
