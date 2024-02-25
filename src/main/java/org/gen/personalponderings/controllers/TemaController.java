@@ -1,6 +1,7 @@
 package org.gen.personalponderings.controllers;
 
 import org.gen.personalponderings.models.Tema;
+import org.gen.personalponderings.models.validations.TemaValidator;
 import org.gen.personalponderings.repositories.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,7 @@ public class TemaController {
 
     @PostMapping
     public ResponseEntity<Tema> post(@RequestBody Tema tema) {
+        TemaValidator.validarDescricao(tema.getDescricao());
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
     }
 
